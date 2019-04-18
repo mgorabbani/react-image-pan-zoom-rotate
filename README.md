@@ -1,38 +1,26 @@
-# React Pan & Zoom
+# React Pan, Zoom & Rotate
 
 A simple pan and zoom for canvas like elements in react.
 
 ## Demo
-[![Edit q8wl1joow9](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/q8wl1joow9)
+
+[![Edit q8wl1joow9](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/n1rv671pkj)
 
 ## Installation
 
 ```
-> yarn add @ajainarayanan/react-pan-zoom
+> yarn add react-image-pan-zoom-rotate
 ```
 
 ## Usage
 
 ```typescript
-import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
+import ReactPanZoom from 'react-image-pan-zoom-rotate';
 class MyComponent extends React.PureComponent {
-
   public render() {
     return (
-      <ReactPanZoom>
-        <img src="some/src/for/image.png" />
-      </ReactPanZoom>
+      <ReactPanZoom image="https://drscdn.500px.org/photo/105738331/q%3D80_m%3D2000/v2?webp=true&sig=538a4f76f4966c84acb01426bb4a4a5e4a85b72a2c3bd64973d3a369f9653007" />
     );
   }
 }
 ```
-
-## Props
-
-- `zoom` : Provide zoom level for the cavnas'ish element. `1` by default
-- `dx` : Provide the initial x co-ordinate to pan the underlying element to be. `0` by default
-- `dy` : Provide the initial y co-ordinate to pan the underlying element to be. `0` by default
-
-For more information on what `dx` and `dy` mean please [refer here](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix)
-`(tx == dx and ty == dy)`.
-

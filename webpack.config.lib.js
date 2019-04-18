@@ -1,37 +1,37 @@
 /* eslint-disable no-var, strict, prefer-arrow-callback */
-"use strict";
+'use strict';
 
-var path = require("path");
-var webpack = require("webpack");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-var ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+var path = require('path');
+var webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   cache: true,
   entry: {
-    main: "./src/react-pan-zoom.tsx",
+    main: './src/PanViewer.tsx',
   },
   output: {
-    filename: "./react-pan-zoom.js",
-    path: __dirname + "/dist",
-    library: "reactPanZoom",
-    libraryTarget: "umd",
+    filename: './PanViewer.js',
+    path: __dirname + '/dist',
+    library: 'reactPanZoom',
+    libraryTarget: 'umd',
   },
   externals: {
     react: {
-      root: "React",
-      commonjs2: "react",
-      commonjs: "react",
-      amd: "react",
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
     },
-    "react-dom": {
-      root: "ReactDOM",
-      commonjs2: "react-dom",
-      commonjs: "react-dom",
-      amd: "react-dom",
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
     },
-    "prop-types": "prop-types",
+    'prop-types': 'prop-types',
   },
   module: {
     rules: [
@@ -40,38 +40,38 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
           },
         ],
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.scss$/,
         use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader",
+          'style-loader',
+          'css-loader',
+          'sass-loader',
           {
-            loader: "@epegzz/sass-vars-loader", // read Sass vars from file or options
+            loader: '@epegzz/sass-vars-loader', // read Sass vars from file or options
             options: {
-              files: [path.resolve(__dirname, "src/styles/colors.js")],
+              files: [path.resolve(__dirname, 'src/styles/colors.js')],
             },
           },
         ],
       },
       {
         test: /\.svg/,
-        use: [{ loader: "svg-sprite-loader", options: { symbolId: "[name]" } }],
+        use: [{ loader: 'svg-sprite-loader', options: { symbolId: '[name]' } }],
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
             options: { transpileOnly: true },
           },
         ],
@@ -81,14 +81,14 @@ module.exports = {
   plugins: [
     new ForkTsCheckerWebpackPlugin({
       tslint: true,
-      watch: ["./src", "./test"], // optional but improves performance (less stat calls)
+      watch: ['./src', './test'], // optional but improves performance (less stat calls)
     }),
     new UglifyJsPlugin(),
     new CleanWebpackPlugin(['dist'], {}),
   ],
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: ['.ts', '.tsx', '.js'],
   },
-  mode: "production",
+  mode: 'production',
 };

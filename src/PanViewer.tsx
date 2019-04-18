@@ -1,7 +1,6 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import ReactPanZoom from "./react-pan-zoom-rotate";
-import styled, { css } from "styled-components";
+import * as React from 'react';
+import ReactPanZoom from './react-pan-zoom-rotate';
+import styled, { css } from 'styled-components';
 
 const Container = css`
   width: 440px;
@@ -41,18 +40,13 @@ const ControlsContainer = styled.div`
   }
 `;
 
-interface IProps {
-  image: string;
-}
-
-export default class PanViewer extends React.Component<IProps> {
+class PanViewer extends React.Component<{ image: string }> {
   public state = {
     dx: 0,
     dy: 0,
     zoom: 1,
-    rotation: 0
+    rotation: 0,
   };
-
   // tslint:disable-next-line: member-ordering
   public renderPanZoomControls = () => {
     return (
@@ -123,7 +117,7 @@ export default class PanViewer extends React.Component<IProps> {
     );
   };
   public componentDidMount() {
-    document.addEventListener("keypress", e => {
+    document.addEventListener('keypress', e => {
       if (e.keyCode === 43) {
         this.zoomIn();
       } else if (e.keyCode === 45) {
@@ -139,7 +133,6 @@ export default class PanViewer extends React.Component<IProps> {
     `;
     return [
       this.renderPanZoomControls(),
-
       <StyledReactPanZoom
         zoom={this.state.zoom}
         pandx={this.state.dx}
@@ -150,47 +143,46 @@ export default class PanViewer extends React.Component<IProps> {
       >
         <img
           style={{
-            transform: `rotate(${this.state.rotation * 90}deg)`
+            transform: `rotate(${this.state.rotation * 90}deg)`,
           }}
           src={this.props.image}
           alt=""
         />
-      </StyledReactPanZoom>
+      </StyledReactPanZoom>,
     ];
   }
-
-  private zoomIn = () => {
+  public zoomIn = () => {
     console.log(this.state.zoom);
     if (this.state.zoom < 2) {
       this.setState({
-        zoom: this.state.zoom + 0.2
+        zoom: this.state.zoom + 0.2,
       });
     }
   };
-
-  private zoomOut = () => {
+  public zoomOut = () => {
     if (this.state.zoom >= 1) {
       this.setState({
-        zoom: this.state.zoom - 0.2
+        zoom: this.state.zoom - 0.2,
       });
     }
   };
-  private rotateLeft = () => {
+  public rotateLeft = () => {
     if (this.state.rotation === -3) {
       this.setState({
-        rotation: 0
+        rotation: 0,
       });
     } else {
       this.setState({
-        rotation: this.state.rotation - 1
+        rotation: this.state.rotation - 1,
       });
     }
   };
-
-  private onPan = (dx: number, dy: number) => {
+  public onPan = (dx: number, dy: number) => {
     this.setState({
       dx,
-      dy
+      dy,
     });
   };
 }
+
+export default PanViewer;
