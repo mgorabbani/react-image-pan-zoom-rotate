@@ -1,19 +1,20 @@
 {
-  "name": "@ajainarayanan/react-pan-zoom",
-  "version": "0.0.3",
-  "description": "Simple wrapper for pan and zoom on html containers",
-  "main": "dist/react-pan-zoom",
-  "typings": "dist/react-pan-zoom.d.ts",
-  "author": "ajainarayanan",
+  "name": "react-image-pan-zoom-rotate",
+  "version": "1.0.0",
+  "description": "Simple wrapper for pan, zoom, rotate on react containers",
+  "main": "dist/index",
+  "typings": "dist/index.d.ts",
+  "author": "mgorabbani",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ajainarayanan/react-pan-zoom.git"
+    "url": "https://github.com/mgorabbani/react-image-pan-zoom-rotate"
   },
   "keywords": [
     "html pan",
     "html zoom",
-    "react pan zoom"
+    "react pan zoom",
+    "react pan zoom rotate"
   ],
   "scripts": {
     "start:dev": "webpack-dev-server",
