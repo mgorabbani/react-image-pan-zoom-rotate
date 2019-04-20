@@ -3,7 +3,8 @@ import ReactPanZoom from './react-pan-zoom-rotate';
 import styled, { css } from 'styled-components';
 
 const Container = css`
-  width: 440px;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,22 +26,24 @@ const ControlsContainer = styled.div`
     text-align: center;
     cursor: pointer;
     height: 40px;
-    border-bottom: 1px solid #f4f4f4;
+    width: 40px;
+    border-bottom: 1px solid #ccc;
     & svg {
-      height: 40px;
-      width: 40px;
-      padding: 5px;
+      height: 100%;
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
     }
     &:last-child {
       border: none;
     }
     &:active {
-      box-shadow: 0px 2px 6px blue;
+      box-shadow: 0px 0px 5px 1px #0c0c0c;
     }
   }
 `;
 
-class PanViewer extends React.Component<{ image: string }> {
+class PanViewer extends React.Component<{ image: string; alt?: string }> {
   public state = {
     dx: 0,
     dy: 0,
@@ -62,14 +65,14 @@ class PanViewer extends React.Component<{ image: string }> {
             <path
               d="M4 12H20"
               stroke="#4C68C1"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
             />
             <path
               d="M12 4L12 20"
               stroke="#4C68C1"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
             />
           </svg>
         </div>
@@ -84,8 +87,8 @@ class PanViewer extends React.Component<{ image: string }> {
             <path
               d="M4 12H20"
               stroke="#4C68C1"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
             />
           </svg>
         </div>
@@ -100,16 +103,16 @@ class PanViewer extends React.Component<{ image: string }> {
             <path
               d="M14 15L9 20L4 15"
               stroke="#4C68C1"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M20 4H13C10.7909 4 9 5.79086 9 8V20"
               stroke="#4C68C1"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
@@ -118,7 +121,7 @@ class PanViewer extends React.Component<{ image: string }> {
   };
   public componentDidMount() {
     document.addEventListener('keypress', e => {
-      if (e.keyCode === 43) {
+      if (e.keyCode === 43 || e.keyCode === 61) {
         this.zoomIn();
       } else if (e.keyCode === 45) {
         this.zoomOut();
@@ -146,18 +149,15 @@ class PanViewer extends React.Component<{ image: string }> {
             transform: `rotate(${this.state.rotation * 90}deg)`,
           }}
           src={this.props.image}
-          alt=""
+          alt={this.props.alt}
         />
       </StyledReactPanZoom>,
     ];
   }
   public zoomIn = () => {
-    console.log(this.state.zoom);
-    if (this.state.zoom < 2) {
-      this.setState({
-        zoom: this.state.zoom + 0.2,
-      });
-    }
+    this.setState({
+      zoom: this.state.zoom + 0.2,
+    });
   };
   public zoomOut = () => {
     if (this.state.zoom >= 1) {
