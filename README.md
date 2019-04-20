@@ -1,3 +1,4 @@
+![npm type definitions](https://img.shields.io/npm/types/typescript.svg?label=lang)
 # React Pan, Zoom & Rotate
 
 A simple pan and zoom for canvas like elements in react.
