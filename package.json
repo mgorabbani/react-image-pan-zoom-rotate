@@ -1,6 +1,6 @@
 {
   "name": "react-image-pan-zoom-rotate",
-  "version": "1.2",
+  "version": "1.2.0",
   "description": "Simple wrapper for pan, zoom, rotate on react containers",
   "main": "dist/PanViewer",
   "typings": "dist/PanViewer.d.ts",
