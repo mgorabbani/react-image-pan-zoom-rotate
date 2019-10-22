@@ -1,6 +1,6 @@
-import * as React from 'react';
-import ReactPanZoom from './react-pan-zoom-rotate';
-import styled, { css } from 'styled-components';
+import * as React from "react";
+import ReactPanZoom from "./react-pan-zoom-rotate";
+import styled, { css } from "styled-components";
 
 const Container = css`
   width: 100%;
@@ -48,7 +48,7 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
     dx: 0,
     dy: 0,
     zoom: 1,
-    rotation: 0,
+    rotation: 0
   };
   // tslint:disable-next-line: member-ordering
   public renderPanZoomControls = () => {
@@ -119,17 +119,6 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
       </ControlsContainer>
     );
   };
-  public componentDidMount() {
-    document.addEventListener('keypress', e => {
-      if (e.keyCode === 43 || e.keyCode === 61) {
-        this.zoomIn();
-      } else if (e.keyCode === 45) {
-        this.zoomOut();
-      } else if (e.keyCode === 114 || e.keyCode === 82) {
-        this.rotateLeft();
-      }
-    });
-  }
   public render() {
     const StyledReactPanZoom = styled(ReactPanZoom)`
       ${Container};
@@ -146,41 +135,41 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
       >
         <img
           style={{
-            transform: `rotate(${this.state.rotation * 90}deg)`,
+            transform: `rotate(${this.state.rotation * 90}deg)`
           }}
           src={this.props.image}
           alt={this.props.alt}
         />
-      </StyledReactPanZoom>,
+      </StyledReactPanZoom>
     ];
   }
   public zoomIn = () => {
     this.setState({
-      zoom: this.state.zoom + 0.2,
+      zoom: this.state.zoom + 0.2
     });
   };
   public zoomOut = () => {
     if (this.state.zoom >= 1) {
       this.setState({
-        zoom: this.state.zoom - 0.2,
+        zoom: this.state.zoom - 0.2
       });
     }
   };
   public rotateLeft = () => {
     if (this.state.rotation === -3) {
       this.setState({
-        rotation: 0,
+        rotation: 0
       });
     } else {
       this.setState({
-        rotation: this.state.rotation - 1,
+        rotation: this.state.rotation - 1
       });
     }
   };
   public onPan = (dx: number, dy: number) => {
     this.setState({
       dx,
-      dy,
+      dy
     });
   };
 }
