@@ -19,7 +19,6 @@ A simple pan and zoom and rotating for images in react.
 - Zoom In 
 - Zoom Out
 - Rotate (in Left only) 
-- Keyboard key press for  +, - , r respectively for Zoom In, Zoom Out and Rotate.
 
 
 ## Usage
