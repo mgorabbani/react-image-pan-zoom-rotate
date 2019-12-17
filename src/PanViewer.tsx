@@ -1,6 +1,6 @@
-import * as React from "react";
-import ReactPanZoom from "./react-pan-zoom-rotate";
-import styled, { css } from "styled-components";
+import * as React from 'react';
+import ReactPanZoom from './react-pan-zoom-rotate';
+import styled, { css } from 'styled-components';
 
 const Container = css`
   width: 100%;
@@ -43,18 +43,48 @@ const ControlsContainer = styled.div`
   }
 `;
 
-class PanViewer extends React.Component<{ image: string; alt?: string }> {
-  public state = {
-    dx: 0,
-    dy: 0,
-    zoom: 1,
-    rotation: 0
+const StyledReactPanZoom = styled(ReactPanZoom)`
+  ${Container};
+`;
+
+type PanViewerProps = {
+  image: string;
+  alt?: string;
+};
+
+const PanViewer = ({ image, alt }: PanViewerProps) => {
+  const [dx, setDx] = React.useState(0);
+  const [dy, setDy] = React.useState(0);
+  const [zoom, setZoom] = React.useState(1);
+  const [rotation, setRotation] = React.useState(0);
+
+  const zoomIn = () => {
+    setZoom(zoom + 0.2);
   };
-  // tslint:disable-next-line: member-ordering
-  public renderPanZoomControls = () => {
-    return (
+
+  const zoomOut = () => {
+    if (zoom >= 1) {
+      setZoom(zoom - 0.2);
+    }
+  };
+
+  const rotateLeft = () => {
+    if (rotation === -3) {
+      setRotation(0);
+    } else {
+      setRotation(rotation - 1);
+    }
+  };
+
+  const onPan = (dx: number, dy: number) => {
+    setDx(dx);
+    setDy(dy);
+  };
+
+  return (
+    <>
       <ControlsContainer>
-        <div onClick={this.zoomIn}>
+        <div onClick={zoomIn}>
           <svg
             width="24"
             height="24"
@@ -76,7 +106,7 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
             />
           </svg>
         </div>
-        <div onClick={this.zoomOut}>
+        <div onClick={zoomOut}>
           <svg
             width="24"
             height="24"
@@ -92,7 +122,7 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
             />
           </svg>
         </div>
-        <div onClick={this.rotateLeft}>
+        <div onClick={rotateLeft}>
           <svg
             width="24"
             height="24"
@@ -117,61 +147,24 @@ class PanViewer extends React.Component<{ image: string; alt?: string }> {
           </svg>
         </div>
       </ControlsContainer>
-    );
-  };
-  public render() {
-    const StyledReactPanZoom = styled(ReactPanZoom)`
-      ${Container};
-    `;
-    return [
-      this.renderPanZoomControls(),
       <StyledReactPanZoom
-        zoom={this.state.zoom}
-        pandx={this.state.dx}
-        pandy={this.state.dy}
-        onPan={this.onPan}
-        rotation={this.state.rotation}
-        key={this.state.dx}
+        zoom={zoom}
+        pandx={dx}
+        pandy={dy}
+        onPan={onPan}
+        rotation={rotation}
+        key={dx}
       >
         <img
           style={{
-            transform: `rotate(${this.state.rotation * 90}deg)`
+            transform: `rotate(${rotation * 90}deg)`,
           }}
-          src={this.props.image}
-          alt={this.props.alt}
+          src={image}
+          alt={alt}
         />
       </StyledReactPanZoom>
-    ];
-  }
-  public zoomIn = () => {
-    this.setState({
-      zoom: this.state.zoom + 0.2
-    });
-  };
-  public zoomOut = () => {
-    if (this.state.zoom >= 1) {
-      this.setState({
-        zoom: this.state.zoom - 0.2
-      });
-    }
-  };
-  public rotateLeft = () => {
-    if (this.state.rotation === -3) {
-      this.setState({
-        rotation: 0
-      });
-    } else {
-      this.setState({
-        rotation: this.state.rotation - 1
-      });
-    }
-  };
-  public onPan = (dx: number, dy: number) => {
-    this.setState({
-      dx,
-      dy
-    });
-  };
-}
+    </>
+  );
+};
 
 export default PanViewer;
