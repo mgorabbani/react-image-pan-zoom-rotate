@@ -50,9 +50,10 @@ const StyledReactPanZoom = styled(ReactPanZoom)`
 type PanViewerProps = {
   image: string;
   alt?: string;
+  ref?: any;
 };
 
-const PanViewer = ({ image, alt }: PanViewerProps) => {
+const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
   const [dx, setDx] = React.useState(0);
   const [dy, setDy] = React.useState(0);
   const [zoom, setZoom] = React.useState(1);
@@ -161,6 +162,7 @@ const PanViewer = ({ image, alt }: PanViewerProps) => {
           }}
           src={image}
           alt={alt}
+          ref={ref}
         />
       </StyledReactPanZoom>
     </>
