@@ -25,6 +25,7 @@ export interface IReactPanZoomProps {
   pandy?: number;
   rotation?: number;
   onPan?: (x: number, y: number) => void;
+  setZoom: (z: number) => void;
   onReset?: (dx: number, dy: number, zoom: number) => void;
   onClick?: (e: React.MouseEvent<any>) => void;
   style?: {};
@@ -132,6 +133,9 @@ export default class ReactPanZoom extends React.PureComponent<
         onTouchMove={this.onTouchMove}
         onTouchEnd={this.onTouchEnd}
         onMouseMove={this.onMouseMove}
+        onWheel={this.onWheel}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
         onClick={this.onClick}
         style={{
           height: this.props.height,
@@ -202,9 +206,31 @@ export default class ReactPanZoom extends React.PureComponent<
     }
   };
 
+  public preventDefault(e: any) {
+    e = e || window.event;
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
+    e.returnValue = false;
+  }
+
   private onMouseMove = (e: React.MouseEvent<EventTarget>) => {
     this.updateMousePosition(e.pageX, e.pageY);
   };
+  private onWheel = (e: React.WheelEvent<EventTarget>) => {
+    Math.sign(e.deltaY) < 0 ? this.props.setZoom((this.props.zoom || 0) + 0.1) : (this.props.zoom || 0) > 1 && this.props.setZoom((this.props.zoom || 0) - 0.1);
+  };
+
+  private onMouseEnter = (e: React.MouseEvent<EventTarget>) => {
+    document.addEventListener('wheel', this.preventDefault, {
+      passive: false,
+    })
+  }
+
+  private onMouseLeave = (e: React.MouseEvent<EventTarget>) => {
+    document.removeEventListener('wheel', this.preventDefault, false)
+  }
+
   private updateMousePosition = (pageX: number, pageY: number) => {
     if (!this.state.mouseDown) return;
 
