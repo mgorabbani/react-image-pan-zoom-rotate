@@ -58,7 +58,6 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
   const [dy, setDy] = React.useState(0);
   const [zoom, setZoom] = React.useState(1);
   const [rotation, setRotation] = React.useState(0);
-  const [flip, setFlip] = React.useState(false);
 
   const zoomIn = () => {
     setZoom(zoom + 0.2);
@@ -76,10 +75,6 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
     } else {
       setRotation(rotation - 1);
     }
-  };
-
-  const flipImage = () => {
-    setFlip(!flip);
   };
 
   const onPan = (dx: number, dy: number) => {
@@ -152,34 +147,9 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
             />
           </svg>
         </div>
-        <div onClick={flipImage}>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke="#4C68C1"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9.178,18.799V1.763L0,18.799H9.178z M8.517,18.136h-7.41l7.41-13.752V18.136z"
-            />
-            <polygon
-              stroke="#4C68C1"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              points="11.385,1.763 11.385,18.799 20.562,18.799 "
-            />
-          </svg>
-        </div>
       </ControlsContainer>
       <StyledReactPanZoom
         zoom={zoom}
-        setZoom={setZoom}
         pandx={dx}
         pandy={dy}
         onPan={onPan}
@@ -188,7 +158,7 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
       >
         <img
           style={{
-            transform: `rotate(${rotation * 90}deg) scaleX(${flip ? -1 : 1})`,
+            transform: `rotate(${rotation * 90}deg)`,
           }}
           src={image}
           alt={alt}
