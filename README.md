@@ -7,7 +7,7 @@
 
 ## Demo
 
-![](https://media.giphy.com/media/WVGLHnLLSREM6lqmWe/source.gif)
+![image](https://user-images.githubusercontent.com/12911638/129459723-3797ebbe-76eb-465b-bf38-5c61212fca83.png)
 
 [![Edit q8wl1joow9](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/n1rv671pkj)
 
@@ -18,6 +18,7 @@
 - Zoom Out
 - Rotate (in Left only)
 - Flip Image
+- Reset
 
 ## Install
 
