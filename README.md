@@ -1,35 +1,54 @@
-![npm type definitions](https://img.shields.io/npm/types/typescript.svg?label=lang)
-# React Pan, Zoom & Rotate
+# React Image Pan, Zoom & Rotate
 
-A simple pan and zoom and rotating for images in react.
-# You're wellcome to put a Pull Request 🚀
+> React library to give control on image to move zoom and rotate
+
+[![NPM](https://img.shields.io/npm/v/react-image-pan-zoom-rotate.svg)](https://www.npmjs.com/package/react-image-pan-zoom-rotate) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+![npm type definitions](https://img.shields.io/npm/types/typescript.svg?label=lang)
+
 ## Demo
+
 ![](https://media.giphy.com/media/WVGLHnLLSREM6lqmWe/source.gif)
 
 [![Edit q8wl1joow9](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/n1rv671pkj)
 
-## Installation
+## Features
+
+- Drag & Move
+- Zoom In
+- Zoom Out
+- Rotate (in Left only)
+- Flip Image
+
+## Install
+
+```bash
+npm install --save react-image-pan-zoom-rotate
+```
+
+or
 
 ```
 > yarn add react-image-pan-zoom-rotate
 ```
 
-## Features
-- Drag & Move
-- Zoom In 
-- Zoom Out
-- Rotate (in Left only) 
-
-
 ## Usage
 
-```typescript
-import ReactPanZoom from 'react-image-pan-zoom-rotate';
-class MyComponent extends React.PureComponent {
-  public render() {
-    return (
-      <ReactPanZoom image="https://drscdn.500px.org/photo/105738331/q%3D80_m%3D2000/v2?webp=true&sig=538a4f76f4966c84acb01426bb4a4a5e4a85b72a2c3bd64973d3a369f9653007" alt="document image"/>
-    );
-  }
+```tsx
+import React from 'react'
+import ReactPanZoom from 'react-image-pan-zoom-rotate'
+
+const App = () => {
+  return (
+    <ReactPanZoom
+      image='https://images.unsplash.com/photo-1551091708-fda32ed3178c'
+      alt='Image alt text'
+    />
+  )
 }
+
+export default App
 ```
+
+## License
+
+MIT © [mgorabbani](https://github.com/mgorabbani)
