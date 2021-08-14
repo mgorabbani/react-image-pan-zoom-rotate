@@ -16,6 +16,13 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
   const [rotation, setRotation] = React.useState(0)
   const [flip, setFlip] = React.useState(false)
 
+  const resetAll = () => {
+    setDx(0)
+    setDy(0)
+    setZoom(1)
+    setRotation(0)
+    setFlip(false)
+  }
   const zoomIn = () => {
     setZoom(zoom + 0.2)
   }
@@ -170,7 +177,8 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
             textAlign: 'center',
             cursor: 'pointer',
             height: 40,
-            width: 40
+            width: 40,
+            borderBottom: ' 1px solid #ccc'
           }}
         >
           <svg
@@ -200,6 +208,35 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
               strokeLinejoin='round'
               points='11.385,1.763 11.385,18.799 20.562,18.799 '
             />
+          </svg>
+        </div>
+        <div
+          onClick={resetAll}
+          style={{
+            textAlign: 'center',
+            cursor: 'pointer',
+            height: 40,
+            width: 40
+          }}
+        >
+          <svg
+            style={{
+              height: '100%',
+              width: '100%',
+              padding: 10,
+              boxSizing: 'border-box'
+            }}
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+            stroke='#4C68C1'
+            strokeWidth={2}
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          >
+            <path d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' />
           </svg>
         </div>
       </div>
