@@ -271,5 +271,5 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
   )
 }
 
+PanViewer.ReactPanZoom = ReactPanZoom
 export default PanViewer
-export { ReactPanZoom }
