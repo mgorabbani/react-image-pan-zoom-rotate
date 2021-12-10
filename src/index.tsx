@@ -13,15 +13,11 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
   const [dx, setDx] = React.useState(0)
   const [dy, setDy] = React.useState(0)
   const [zoom, setZoom] = React.useState(1)
-  const [rotation, setRotation] = React.useState(0)
-  const [flip, setFlip] = React.useState(false)
 
   const resetAll = () => {
     setDx(0)
     setDy(0)
     setZoom(1)
-    setRotation(0)
-    setFlip(false)
   }
   const zoomIn = () => {
     setZoom(zoom + 0.2)
@@ -31,18 +27,6 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
     if (zoom >= 1) {
       setZoom(zoom - 0.2)
     }
-  }
-
-  const rotateLeft = () => {
-    if (rotation === -3) {
-      setRotation(0)
-    } else {
-      setRotation(rotation - 1)
-    }
-  }
-
-  const flipImage = () => {
-    setFlip(!flip)
   }
 
   const onPan = (dx: number, dy: number) => {
@@ -133,84 +117,6 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
           </svg>
         </div>
         <div
-          onClick={rotateLeft}
-          style={{
-            textAlign: 'center',
-            cursor: 'pointer',
-            height: 40,
-            width: 40,
-            borderBottom: ' 1px solid #ccc'
-          }}
-        >
-          <svg
-            style={{
-              height: '100%',
-              width: '100%',
-              padding: 10,
-              boxSizing: 'border-box'
-            }}
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              d='M14 15L9 20L4 15'
-              stroke='#4C68C1'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-            <path
-              d='M20 4H13C10.7909 4 9 5.79086 9 8V20'
-              stroke='#4C68C1'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-          </svg>
-        </div>
-        <div
-          onClick={flipImage}
-          style={{
-            textAlign: 'center',
-            cursor: 'pointer',
-            height: 40,
-            width: 40,
-            borderBottom: ' 1px solid #ccc'
-          }}
-        >
-          <svg
-            style={{
-              height: '100%',
-              width: '100%',
-              padding: 10,
-              boxSizing: 'border-box'
-            }}
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              stroke='#4C68C1'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M9.178,18.799V1.763L0,18.799H9.178z M8.517,18.136h-7.41l7.41-13.752V18.136z'
-            />
-            <polygon
-              stroke='#4C68C1'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              points='11.385,1.763 11.385,18.799 20.562,18.799 '
-            />
-          </svg>
-        </div>
-        <div
           onClick={resetAll}
           style={{
             textAlign: 'center',
@@ -254,12 +160,10 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
         pandx={dx}
         pandy={dy}
         onPan={onPan}
-        rotation={rotation}
         key={dx}
       >
         <img
           style={{
-            transform: `rotate(${rotation * 90}deg) scaleX(${flip ? -1 : 1})`,
             width: '100%'
           }}
           src={image}
