@@ -164,7 +164,9 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
       >
         <img
           style={{
-            width: '100%'
+            width: '100%',
+            position: 'absolute',
+            top: '0',
           }}
           src={image}
           alt={alt}
