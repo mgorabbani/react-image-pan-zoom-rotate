@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import ReactPanZoom from '../.';
+import ReactPanZoom, { PanViewer } from '../.';
 
 const App = () => {
   return (

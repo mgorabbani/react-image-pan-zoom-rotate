@@ -1,15 +1,15 @@
 import * as React from 'react';
-import ReactPanZoom from './react-pan-zoom-rotate';
+import PanViewer from './PanViewer';
 
 // box-shadow: 0px 0px 5px 1px #0c0c0c;
 
-type PanViewerProps = {
+type ReactPanZoomProps = {
   image: string;
   alt?: string;
   ref?: any;
 };
 
-const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
+const ReactPanZoom = ({ image, alt, ref }: ReactPanZoomProps) => {
   const [dx, setDx] = React.useState(0);
   const [dy, setDy] = React.useState(0);
   const [zoom, setZoom] = React.useState(1);
@@ -240,7 +240,7 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
           </svg>
         </div>
       </div>
-      <ReactPanZoom
+      <PanViewer
         style={{
           width: '100%',
           height: '100%',
@@ -266,10 +266,10 @@ const PanViewer = ({ image, alt, ref }: PanViewerProps) => {
           alt={alt}
           ref={ref}
         />
-      </ReactPanZoom>
+      </PanViewer>
     </div>
   );
 };
 
-export default PanViewer;
 export { PanViewer };
+export default ReactPanZoom;
