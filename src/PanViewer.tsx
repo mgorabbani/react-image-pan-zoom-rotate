@@ -32,8 +32,7 @@ export interface IReactPanZoomProps {
   children?: React.ReactNode;
 }
 export default class ReactPanZoom extends React.PureComponent<
-  IReactPanZoomProps,
-  IReactPanZoomStateType
+  IReactPanZoomProps
 > {
   // In strict null checking setting default props doesn't seem to work. Hence the non-null assertion.
   // :crossedfingers: it shouldn't be deprecated. Or the very least support defaultProps semantics as proposed
@@ -51,7 +50,7 @@ export default class ReactPanZoom extends React.PureComponent<
   private panWrapper: any;
 
   private panContainer: any;
-  private getInitialState = () => {
+  private getInitialState = (): IReactPanZoomStateType => {
     const { pandx, pandy, zoom } = this.props;
     const defaultDragData = {
       dx: pandx!,
@@ -77,7 +76,7 @@ export default class ReactPanZoom extends React.PureComponent<
 
   public state = this.getInitialState();
 
-  public componentWillReceiveProps(nextProps: IReactPanZoomProps) {
+  public UNSAFE_componentWillReceiveProps(nextProps: IReactPanZoomProps) {
     const { matrixData } = this.state;
     if (matrixData[0] !== nextProps.zoom) {
       const newMatrixData = [...this.state.matrixData];
@@ -144,10 +143,10 @@ export default class ReactPanZoom extends React.PureComponent<
           userSelect: 'none',
           width: this.props.width,
         }}
-        ref={ref => (this.panWrapper = ref)}
+        ref={(ref) => (this.panWrapper = ref)}
       >
         <div
-          ref={ref => (ref ? (this.panContainer = ref) : null)}
+          ref={(ref) => (ref ? (this.panContainer = ref) : null)}
           style={{
             transform: `matrix(${this.state.matrixData.toString()})`,
           }}

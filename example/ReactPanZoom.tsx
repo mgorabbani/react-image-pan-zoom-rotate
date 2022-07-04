@@ -1,7 +1,5 @@
 import * as React from 'react';
-import PanViewer from './PanViewer';
-
-// box-shadow: 0px 0px 5px 1px #0c0c0c;
+import { PanViewer } from '../dist';
 
 type ReactPanZoomProps = {
   image: string;
@@ -270,6 +268,3 @@ const ReactPanZoom = ({ image, alt, ref }: ReactPanZoomProps) => {
     </div>
   );
 };
-
-export { PanViewer };
-export default ReactPanZoom;
