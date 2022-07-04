@@ -25,3 +25,4 @@ yarn-error.log*
 
 example/.parcel-cache
 example/node_modules
+example/dist

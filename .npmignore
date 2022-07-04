@@ -19,3 +19,10 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+*.log
+.cache
+
+example/.parcel-cache
+example/node_modules
+example/dist
