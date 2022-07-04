@@ -91,11 +91,11 @@ Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx
 
 ```js
 // ./types/index.d.ts
-declare var __DEV__: boolean
+declare var __DEV__: boolean;
 
 // inside your code...
 if (__DEV__) {
-  console.log('foo')
+  console.log('foo');
 }
 ```
 
@@ -139,6 +139,8 @@ For vanilla CSS, you can include it at the root directory and add it to the `fil
 ## Publishing to NPM
 
 We recommend using [np](https://github.com/sindresorhus/np).
+
+use `npx np` to publish to NPM.
 
 ## Usage with Lerna
 

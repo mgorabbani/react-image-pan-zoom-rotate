@@ -35,19 +35,25 @@ or
 ## Usage
 
 ```tsx
-import React from 'react'
-import ReactPanZoom from 'react-image-pan-zoom-rotate'
+import React from 'react';
+import ReactPanZoom from 'react-image-pan-zoom-rotate';
 
 const App = () => {
   return (
     <ReactPanZoom
-      image='https://images.unsplash.com/photo-1551091708-fda32ed3178c'
-      alt='Image alt text'
+      image="https://images.unsplash.com/photo-1551091708-fda32ed3178c"
+      alt="Image alt text"
     />
-  )
-}
+  );
+};
 
-export default App
+export default App;
+```
+
+or Check example folder below file to use your custom UI
+
+```
+ReactPanZoom.tsx
 ```
 
 ## License
