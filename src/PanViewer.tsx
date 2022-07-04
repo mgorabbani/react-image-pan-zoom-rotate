@@ -76,7 +76,7 @@ export default class ReactPanZoom extends React.PureComponent<
 
   public state = this.getInitialState();
 
-  public componentWillReceiveProps(nextProps: IReactPanZoomProps) {
+  public UNSAFE_componentWillReceiveProps(nextProps: IReactPanZoomProps) {
     const { matrixData } = this.state;
     if (matrixData[0] !== nextProps.zoom) {
       const newMatrixData = [...this.state.matrixData];
