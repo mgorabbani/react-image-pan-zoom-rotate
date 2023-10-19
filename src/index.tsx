@@ -7,9 +7,10 @@ type ReactPanZoomProps = {
   image: string;
   alt?: string;
   ref?: any;
+  resetImageState?: boolean;
 };
 
-const ReactPanZoom = ({ image, alt, ref }: ReactPanZoomProps) => {
+const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) => {
   const [dx, setDx] = React.useState(0);
   const [dy, setDy] = React.useState(0);
   const [zoom, setZoom] = React.useState(1);
@@ -23,6 +24,11 @@ const ReactPanZoom = ({ image, alt, ref }: ReactPanZoomProps) => {
     setRotation(0);
     setFlip(false);
   };
+
+  if (resetImageState === true) {
+    resetAll()
+  }
+  
   const zoomIn = () => {
     setZoom(zoom + 0.2);
   };
