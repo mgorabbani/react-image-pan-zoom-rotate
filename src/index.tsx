@@ -8,12 +8,39 @@ type ReactPanZoomProps = {
   alt?: string;
   ref?: any;
   resetImageState?: boolean;
+  initialZoom?: number
+  minZoom?: number;
+  maxZoom?: number;
+  withoutControls?: boolean;
+  withZoomInButton?: boolean;
+  withZoomOutButton?: boolean;
+  withRotateButton?: boolean;
+  withFlipButton?: boolean;
+  withResetButton?: boolean;
+  withCloseButton?: boolean;
+  onClose?: () => void;
 };
 
-const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) => {
+const ReactPanZoom = ({ 
+  image, 
+  alt, 
+  ref, 
+  resetImageState,
+  initialZoom = 1,
+  minZoom = 1,
+  maxZoom = 5,
+  withoutControls = false,
+  withZoomInButton = true,
+  withZoomOutButton = true,
+  withRotateButton = true,
+  withFlipButton = true,
+  withResetButton = true,
+  withCloseButton = false,
+  onClose,
+}: ReactPanZoomProps) => {
   const [dx, setDx] = React.useState(0);
   const [dy, setDy] = React.useState(0);
-  const [zoom, setZoom] = React.useState(1);
+  const [zoom, setZoom] = React.useState(initialZoom);
   const [rotation, setRotation] = React.useState(0);
   const [flip, setFlip] = React.useState(false);
 
@@ -30,11 +57,13 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
   }
   
   const zoomIn = () => {
-    setZoom(zoom + 0.2);
+    if (zoom < maxZoom) {
+      setZoom(zoom + 0.2);
+    }
   };
 
   const zoomOut = () => {
-    if (zoom >= 1) {
+    if (zoom > minZoom) {
       setZoom(zoom - 0.2);
     }
   };
@@ -58,6 +87,7 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
 
   return (
     <div>
+      {!withoutControls ? (
       <div
         style={{
           position: 'absolute',
@@ -70,6 +100,7 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
           boxShadow: '0px 2px 6px rgba(53, 67, 93, 0.32)',
         }}
       >
+        {withZoomInButton ? (
         <div
           onClick={zoomIn}
           style={{
@@ -77,7 +108,7 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             cursor: 'pointer',
             height: 40,
             width: 40,
-            borderBottom: ' 1px solid #ccc',
+            borderBottom: '1px solid #ccc',
           }}
         >
           <svg
@@ -107,6 +138,8 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             />
           </svg>
         </div>
+        ): null}
+        {withZoomOutButton ? (
         <div
           onClick={zoomOut}
           style={{
@@ -114,7 +147,7 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             cursor: 'pointer',
             height: 40,
             width: 40,
-            borderBottom: ' 1px solid #ccc',
+            borderBottom: '1px solid #ccc',
           }}
         >
           <svg
@@ -138,6 +171,8 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             />
           </svg>
         </div>
+        ) : null}
+        {withRotateButton ? (
         <div
           onClick={rotateLeft}
           style={{
@@ -145,7 +180,7 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             cursor: 'pointer',
             height: 40,
             width: 40,
-            borderBottom: ' 1px solid #ccc',
+            borderBottom: '1px solid #ccc',
           }}
         >
           <svg
@@ -177,6 +212,8 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             />
           </svg>
         </div>
+        ) : null}
+        {withFlipButton ? (
         <div
           onClick={flipImage}
           style={{
@@ -184,7 +221,7 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             cursor: 'pointer',
             height: 40,
             width: 40,
-            borderBottom: ' 1px solid #ccc',
+            borderBottom: '1px solid #ccc',
           }}
         >
           <svg
@@ -216,6 +253,8 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             />
           </svg>
         </div>
+        ) : null}
+        {withResetButton ? (
         <div
           onClick={resetAll}
           style={{
@@ -223,6 +262,7 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             cursor: 'pointer',
             height: 40,
             width: 40,
+            borderBottom: withCloseButton ? '1px solid #ccc' : '',
           }}
         >
           <svg
@@ -245,7 +285,37 @@ const ReactPanZoom = ({ image, alt, ref, resetImageState }: ReactPanZoomProps) =
             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
           </svg>
         </div>
+        ) : null}
+        {withCloseButton ? (
+        <div
+          onClick={onClose}
+          style={{
+            textAlign: 'center',
+            cursor: 'pointer',
+            height: 40,
+            width: 40,
+          }}
+        >
+          <svg
+            style={{
+              height: '100%',
+              width: '100%',
+              padding: 10,
+              boxSizing: 'border-box',
+            }}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M19 6L6 19" stroke="#4C68C1" strokeWidth="2" strokeLinecap="round" />
+            <path d="M6 6L19 19" stroke="#4C68C1" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </div>
+        ) : null}
       </div>
+      ) : null}
       <PanViewer
         style={{
           width: '100%',
