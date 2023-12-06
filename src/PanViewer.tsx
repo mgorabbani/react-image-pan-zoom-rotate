@@ -30,6 +30,8 @@ export interface IReactPanZoomProps {
   onClick?: (e: React.MouseEvent<any>) => void;
   style?: {};
   children?: React.ReactNode;
+  minZoom?: number;
+  maxZoom?: number;
 }
 export default class ReactPanZoom extends React.PureComponent<
   IReactPanZoomProps
@@ -45,6 +47,8 @@ export default class ReactPanZoom extends React.PureComponent<
     pandy: 0,
     zoom: 0,
     rotation: 0,
+    minZoom: 0.5,
+    maxZoom: 5,
   };
 
   private panWrapper: any;
@@ -223,8 +227,9 @@ export default class ReactPanZoom extends React.PureComponent<
 
   private onWheel = (e: React.WheelEvent<EventTarget>) => {
     Math.sign(e.deltaY) < 0
-      ? this.props.setZoom((this.props.zoom || 0) + 0.1)
-      : (this.props.zoom || 0) > 1 &&
+      ? (this.props.zoom || 0) < (this.props.maxZoom ?? 0) &&
+        this.props.setZoom((this.props.zoom || 0) + 0.1)
+      : (this.props.zoom || 0) > (this.props.minZoom ?? 0) &&
         this.props.setZoom((this.props.zoom || 0) - 0.1);
   };
 
