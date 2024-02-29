@@ -88,6 +88,10 @@ export default class ReactPanZoom extends React.PureComponent<
     }
   }
 
+  public componentWillUnmount() {
+    document.removeEventListener('wheel', this.preventDefault, false);
+  }
+
   public reset = () => {
     const matrixData = [0.4, 0, 0, 0.4, 0, 0];
     this.setState({ matrixData });
